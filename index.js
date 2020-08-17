@@ -3,6 +3,7 @@ const app = express()
 const path = require('path')
 
 const convert = require('./lib/convert')
+const api = require('./lib/api')
 
 const port = process.env.PORT || 3000
 
@@ -10,7 +11,9 @@ app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.get('/', (req,res) => {
+app.get('/', async(req,res) => {
+  const cotacao =  api.getCotacao()
+    console.log('cotacao', cotacao)
     res.render('home')
 })
 
